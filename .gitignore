@@ -1,0 +1,10 @@
+# 密钥（绝对不要提交）
+.env
+
+# macOS
+.DS_Store
+
+# 依赖 / 构建产物（本项目暂无，预留）
+node_modules/
+dist/
+*.log

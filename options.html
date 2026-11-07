@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!--
+  options.html —— 扩展的「选项页」（设置页），从弹窗点「设置保存文件」进入，
+  或者在 chrome://extensions 里点「扩展选项」也能打开。
+
+  这里只做一件事：让用户指定一个本地 .tsv 文件，之后收藏单词自动写进去。
+  注意它同时引入了 file-store.js（存文件句柄）和 options.js（页面逻辑）。
+-->
+<html lang="zh">
+<head>
+  <meta charset="utf-8" />
+  <!-- 设置页是普通网页，宽度可以放宽到 560px -->
+  <style>
+    body { font-family: -apple-system, sans-serif; padding: 24px; max-width: 560px; }
+    h1 { font-size: 18px; }
+    button { padding: 8px 14px; cursor: pointer; margin-right: 8px; }
+    #status { margin-top: 12px; font-size: 13px; color: #555; }
+  </style>
+</head>
+<body>
+  <h1>Dia Translator · 设置</h1>
+  <p>
+    选择一个本地文件（比如 <code>words.tsv</code>）。之后每次收藏单词都会自动写入它，
+    不会出现下载窗口。
+  </p>
+
+  <!-- pick：弹出系统文件选择框；sync：把当前词表立刻写一次 -->
+  <button id="pick">选择保存文件</button>
+  <button id="sync">立即同步一次</button>
+
+  <!-- 状态行，由 options.js 更新（尚未选择文件 / 当前文件：xxx（权限：granted）） -->
+  <p id="status">尚未选择文件</p>
+
+  <!--
+    顺序很重要：options.js 里用到了 file-store.js 的 saveFileHandle / loadFileHandle，
+    所以依赖文件必须先加载。
+  -->
+  <script src="file-store.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>

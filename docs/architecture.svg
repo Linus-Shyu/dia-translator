@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="470" viewBox="0 0 900 470" role="img" aria-labelledby="t">
+  <title id="t">Dia Translator 架构图：content.js / background.js / chrome.storage / offscreen.js / popup / options / words.tsv</title>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7.5" markerHeight="7.5" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#57606a"/>
+    </marker>
+    <style>
+      .box   { fill: #f6f8fa; stroke: #d0d7de; stroke-width: 1.2; }
+      .card  { fill: #ffffff; stroke: #d8dee4; stroke-width: 1; }
+      .title { fill: #1f2328; font-size: 15px; font-weight: 600; }
+      .sub   { fill: #57606a; font-size: 12.5px; }
+      .lab   { fill: #57606a; font-size: 12.5px; }
+      .line  { stroke: #57606a; stroke-width: 1.5; fill: none; }
+      text   { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif; }
+    </style>
+  </defs>
+
+  <rect class="card" x="1" y="1" width="898" height="468" rx="14"/>
+
+  <!-- ===== 方块 ===== -->
+  <rect class="box" x="55"  y="60"  width="195" height="84" rx="10"/>
+  <text class="title" x="152" y="93"  text-anchor="middle">content.js</text>
+  <text class="sub"   x="152" y="116" text-anchor="middle">每个网页一份 · 划词/气泡</text>
+
+  <rect class="box" x="420" y="60"  width="390" height="84" rx="10"/>
+  <text class="title" x="615" y="93"  text-anchor="middle">background.js</text>
+  <text class="sub"   x="615" y="116" text-anchor="middle">service worker · 无 DOM · 会休眠</text>
+
+  <rect class="box" x="110" y="245" width="250" height="84" rx="10"/>
+  <text class="title" x="235" y="278" text-anchor="middle">chrome.storage.local</text>
+  <text class="sub"   x="235" y="301" text-anchor="middle">词表数据</text>
+
+  <rect class="box" x="500" y="245" width="300" height="84" rx="10"/>
+  <text class="title" x="650" y="278" text-anchor="middle">offscreen.js</text>
+  <text class="sub"   x="650" y="301" text-anchor="middle">隐藏页面 · 真正写文件</text>
+
+  <rect class="box" x="55"  y="380" width="150" height="58" rx="10"/>
+  <text class="title" x="130" y="406" text-anchor="middle">popup.js</text>
+  <text class="sub"   x="130" y="426" text-anchor="middle">词表面板</text>
+
+  <rect class="box" x="225" y="380" width="150" height="58" rx="10"/>
+  <text class="title" x="300" y="406" text-anchor="middle">options.js</text>
+  <text class="sub"   x="300" y="426" text-anchor="middle">选择保存文件</text>
+
+  <rect class="box" x="560" y="380" width="170" height="58" rx="10"/>
+  <text class="title" x="645" y="406" text-anchor="middle">words.tsv</text>
+  <text class="sub"   x="645" y="426" text-anchor="middle">用户选定的本地文件</text>
+
+  <!-- ===== 箭头 ===== -->
+  <path class="line" d="M 250 88 H 413" marker-end="url(#arrow)"/>
+  <text class="lab" x="331" y="79" text-anchor="middle">1 翻译请求</text>
+
+  <path class="line" d="M 420 122 H 257" marker-end="url(#arrow)"/>
+  <text class="lab" x="331" y="140" text-anchor="middle">2 返回译文</text>
+
+  <path class="line" d="M 152 144 V 238" marker-end="url(#arrow)"/>
+  <text class="lab" x="166" y="196">3 存词表</text>
+
+  <path class="line" d="M 470 144 V 205 H 300 V 238" marker-end="url(#arrow)"/>
+  <text class="lab" x="313" y="198">4 读词表</text>
+
+  <path class="line" d="M 650 144 V 238" marker-end="url(#arrow)"/>
+  <text class="lab" x="664" y="196">5 叫醒</text>
+
+  <path class="line" d="M 645 329 V 372" marker-end="url(#arrow)"/>
+  <text class="lab" x="659" y="356">6 写文件</text>
+
+  <path class="line" d="M 130 380 V 336" marker-end="url(#arrow)"/>
+  <text class="lab" x="144" y="362">7 读词表</text>
+
+  <text class="sub" x="450" y="455" text-anchor="middle" opacity="0.75">content.js ⇄ background.js 走消息；写文件必须经 offscreen 文档完成</text>
+</svg>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!--
+  popup.html —— 点击浏览器工具栏上的扩展图标时弹出的那个小面板（宽 260px）
+
+  它只和 popup.js 打交道，跟网页、跟翻译气泡互不影响。
+  面板能显示什么，取决于 popup.js 从 chrome.storage.local 读到了什么。
+-->
+<html lang="zh">
+<head>
+  <meta charset="utf-8" />
+  <!--
+    这里的 <style> 只作用于这个弹窗自己。
+    注意：弹窗宽度受浏览器限制（约 800px 以内），所以这里直接写死 260px。
+  -->
+  <style>
+    body { width: 260px; padding: 12px; font-family: -apple-system, sans-serif; }
+    h3 { margin: 0 0 8px; font-size: 14px; }
+    button { width: 100%; padding: 8px; margin: 6px 0; cursor: pointer; }
+    #count { font-size: 12px; color: #666; margin: 0 0 8px; }
+    /* min-height 预留一行高度，避免文字从「无」变成「已复制」时面板跳动 */
+    #status { font-size: 12px; color: #2a7a2a; min-height: 16px; margin: 8px 0 0; }
+  </style>
+</head>
+<body>
+  <h3>Dia Translator</h3>
+
+  <!-- 词数，由 popup.js 的 refresh() 填进去 -->
+  <p id="count">已收藏 0 个单词</p>
+
+  <!-- 三个按钮的 id 就是 popup.js 里 getElementById 找的钥匙，改名要两边一起改 -->
+  <button id="copy">复制全部（粘贴到 Quizlet）</button>
+  <button id="download">下载 words.tsv</button>
+  <button id="options">设置保存文件</button>
+
+  <!-- 操作结果提示（已复制 ✓ / 还没有收藏的单词 之类） -->
+  <p id="status"></p>
+
+  <!-- 放在 body 最后：保证上面的元素都已经存在，脚本才能找到它们 -->
+  <script src="popup.js"></script>
+</body>
+</html>

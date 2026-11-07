@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<!--
+  offscreen.html —— 一个「看不见的页面」
+  ----------------------------------------------------------------------------
+  它由 background.js 通过 chrome.offscreen.createDocument() 动态创建，
+  不会出现在任何标签页里，用户永远看不到。
+
+  存在的唯一理由：写本地文件需要文件句柄和权限，而这两样在 service worker
+  里拿不到，Chrome 要求放进一个有 DOM 的文档里做，offscreen 文档就是官方方案。
+
+  它自己不写逻辑，只是把两个脚本引进来：
+    file-store.js  → 取出当初在设置页保存的文件句柄
+    offscreen.js   → 收到消息后真正执行写文件
+-->
+<html>
+<body>
+  <script src="file-store.js"></script>
+  <script src="offscreen.js"></script>
+</body>
+</html>
